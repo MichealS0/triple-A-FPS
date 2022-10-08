@@ -1,0 +1,14 @@
+using UnityEngine;
+
+public class MoveCamera : MonoBehaviour
+{
+
+    public Transform cameraPosition;
+
+    void Update()
+    {
+        transform.position = cameraPosition.position;       
+    }
+
+    // -- Back At It Again
+}
