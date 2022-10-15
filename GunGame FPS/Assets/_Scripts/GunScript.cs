@@ -107,7 +107,7 @@ public class GunScript : MonoBehaviour
 
                 GameObject bullethole = Instantiate(impactEffect, hit.point, Quaternion.LookRotation(hit.normal));
                 bullethole.transform.position += bullethole.transform.position / 100;
-                Destroy(bullethole, 5f);
+                Destroy(bullethole, 2f);
 
                 if (hit.rigidbody != null)
                 {
