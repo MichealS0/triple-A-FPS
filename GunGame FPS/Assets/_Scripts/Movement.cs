@@ -1,7 +1,9 @@
 using UnityEngine;
+using Photon.Pun;
 
 public class Movement : MonoBehaviour
 {
+    PhotonView view;
     [Header("KeyBinds")]
     [SerializeField] private KeyCode jumpKey = KeyCode.Space;
 
@@ -32,14 +34,19 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb.GetComponent<Rigidbody>();
+        view = GetComponent<PhotonView>();
         rb.freezeRotation = true;
         readyforJump = true;
     }
 
     void Update()
     {
-        InputHandler();
-        SpeedControl();
+        if (view.IsMine)
+        {
+            InputHandler();
+            SpeedControl();
+        }
+
         isGrounded = Physics.Raycast(transform.position, Vector3.down, playerH * 0.5f + 0.2f, ground);
 
         if(isGrounded)
@@ -50,7 +57,10 @@ public class Movement : MonoBehaviour
 
     void FixedUpdate()
     {
-        MovePlayer();
+        if(view.IsMine)
+        {
+            MovePlayer();
+        }
     }
 
     void InputHandler()
